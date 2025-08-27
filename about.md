@@ -1,3 +1,3 @@
-# Template Mod
+# True List Difficulties
 
-Edit about.md to change this
+Shows true (estimated) list difficulties

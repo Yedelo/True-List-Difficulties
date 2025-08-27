@@ -10,5 +10,14 @@
 	"name": "True List Difficulties",
 	"version": "v1.0.0",
 	"developer": "Yedel",
-	"description": "Shows different true (estimated) difficulties of level lists"
+	"description": "Shows true (estimated) list difficulties",
+	"tags": ["enhancement", "interface"],
+	"links": {
+		"homepage": "https://geode-sdk.org/mods/yedel.true_list_difficulties",
+		"source": "https://github.com/Yedelo/True-List-Difficulties"
+	},
+	"issues": {
+		"info": "Report issues to the issue tracker on GitHub or to yedel on discord",
+		"url": "https://github.com/Yedelo/True-List-Difficulties/issues"
+	},
 }
