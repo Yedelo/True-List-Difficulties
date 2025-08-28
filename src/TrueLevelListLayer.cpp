@@ -2,7 +2,7 @@
 
 using namespace geode::prelude;
 
-void logLevelInfo(GJGameLevel* level);
+#include "PsuedoDifficulty.hpp"
 
 #include <Geode/modify/LevelListLayer.hpp>
 class $modify(TrueLevelListLayer, LevelListLayer) {
@@ -23,6 +23,10 @@ class $modify(TrueLevelListLayer, LevelListLayer) {
     }
 
     void showTrueListDifficulty(CCObject* sender) {
-        
+        CCObject* object;
+        CCARRAY_FOREACH(m_levels, object) {
+            auto level = geode::cast::typeinfo_cast<GJGameLevel*>(object);
+            log::info("Level {} has difficulty {}", level->m_levelName, static_cast<int>(getPsuedoDifficulty(level)));
+        }
     }
 };
