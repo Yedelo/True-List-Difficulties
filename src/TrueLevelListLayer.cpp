@@ -4,6 +4,11 @@ using namespace geode::prelude;
 
 #include "PsuedoDifficulty.hpp"
 
+struct DifficultyInfo {
+    PsuedoDifficulty difficulty;
+    bool rated;
+};
+
 #include <Geode/modify/LevelListLayer.hpp>
 class $modify(TrueLevelListLayer, LevelListLayer) {
     $override bool init(GJLevelList* list) {
@@ -23,10 +28,27 @@ class $modify(TrueLevelListLayer, LevelListLayer) {
     }
 
     void showTrueListDifficulty(CCObject* sender) {
+        std::vector<DifficultyInfo> difficulties;
         CCObject* object;
-        CCARRAY_FOREACH(m_levels, object) {
-            auto level = geode::cast::typeinfo_cast<GJGameLevel*>(object);
-            log::info("Level {} has difficulty {}", level->m_levelName, static_cast<int>(getPsuedoDifficulty(level)));
+        CCArray* levels = m_levelList->getListLevelsArray(CCArray::create());
+        CCARRAY_FOREACH(levels, object) {
+            if (GJGameLevel* level = geode::cast::typeinfo_cast<GJGameLevel*>(object)) {
+                difficulties.push_back(DifficultyInfo {
+                    .difficulty = getPsuedoDifficulty(level),
+                    .rated = level->m_stars != 0
+                });
+            }
+        } 
+        std::vector<int> filteredDifficulties;
+        for (int i = 0; i < difficulties.size(); i ++) {
+            DifficultyInfo info = difficulties.at(i);
+            PsuedoDifficulty difficulty = info.difficulty;
+            bool rated = info.rated;
+            if (!Mod::get()->getSettingValue<bool>("include-rated-levels") && rated) continue;
+            if (!Mod::get()->getSettingValue<bool>("include-unrated-levels") && !rated) continue;
+            if (!Mod::get()->getSettingValue<bool>("include-na-levels") && difficulty == PsuedoDifficulty::NA) continue;
+            filteredDifficulties.push_back(static_cast<int>(difficulty));
         }
+        log::info("{}", filteredDifficulties);
     }
 };

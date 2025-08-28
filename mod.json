@@ -33,6 +33,24 @@
 			"type": "bool",
 			"name": "Enabled",
 			"default": true
+		},
+		"include-rated-levels": {
+			"type": "bool",
+			"name": "Include Rated Levels",
+			"description": "Whether to include rated levels when calculating true difficulties.",
+			"default": true
+		},
+		"include-unrated-levels": {
+			"type": "bool",
+			"name": "Include Unrated Levels",
+			"description": "Whether to include unrated levels when calculating true difficulties.",
+			"default": true
+		},
+		"include-na-levels": {
+			"type": "bool",
+			"name": "Include NA levels",
+			"description": "Whether to include NA levels (as difficulty 0) when calculating true difficulties.",
+			"default": false
 		}
 	}
 }
