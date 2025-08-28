@@ -39,7 +39,7 @@ class $modify(TrueLevelListLayer, LevelListLayer) {
                 });
             }
         } 
-        std::vector<int> filteredDifficulties;
+        std::vector<int> difficultyData;
         for (int i = 0; i < difficulties.size(); i ++) {
             DifficultyInfo info = difficulties.at(i);
             PsuedoDifficulty difficulty = info.difficulty;
@@ -47,8 +47,9 @@ class $modify(TrueLevelListLayer, LevelListLayer) {
             if (!Mod::get()->getSettingValue<bool>("include-rated-levels") && rated) continue;
             if (!Mod::get()->getSettingValue<bool>("include-unrated-levels") && !rated) continue;
             if (!Mod::get()->getSettingValue<bool>("include-na-levels") && difficulty == PsuedoDifficulty::NA) continue;
-            filteredDifficulties.push_back(static_cast<int>(difficulty));
+            difficultyData.push_back(static_cast<int>(difficulty));
         }
-        log::info("{}", filteredDifficulties);
+        std::sort(difficultyData.begin(), difficultyData.end());
+        log::info("{}", difficultyData);
     }
 };
