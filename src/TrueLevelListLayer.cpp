@@ -4,6 +4,7 @@ using namespace geode::prelude;
 
 #include "PsuedoDifficulty.hpp"
 #include "Math.hpp"
+#include "TrueListDifficultyPopup.hpp"
 
 struct DifficultyInfo {
     PsuedoDifficulty difficulty;
@@ -55,5 +56,6 @@ class $modify(TrueLevelListLayer, LevelListLayer) {
         log::info("Mean difficulty: {}", statistics.mean);
         log::info("Median difficulty: {}", statistics.median);
         log::info("Mode difficulty: {}", statistics.mode);
+        TrueListDifficultyPopup::create("Hello true list difficulty popup")->show();
     }
 };
