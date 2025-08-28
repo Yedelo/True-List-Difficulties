@@ -3,6 +3,7 @@
 using namespace geode::prelude;
 
 #include "PsuedoDifficulty.hpp"
+#include "Math.hpp"
 
 struct DifficultyInfo {
     PsuedoDifficulty difficulty;
@@ -50,6 +51,9 @@ class $modify(TrueLevelListLayer, LevelListLayer) {
             difficultyData.push_back(static_cast<int>(difficulty));
         }
         std::sort(difficultyData.begin(), difficultyData.end());
-        log::info("{}", difficultyData);
+        Statistics statistics = getStatistics(difficultyData);
+        log::info("Mean difficulty: {}", statistics.mean);
+        log::info("Median difficulty: {}", statistics.median);
+        log::info("Mode difficulty: {}", statistics.mode);
     }
 };
