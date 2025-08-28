@@ -2,6 +2,8 @@
 
 using namespace geode::prelude;
 
+void logLevelInfo(GJGameLevel* level);
+
 #include <Geode/modify/LevelListLayer.hpp>
 class $modify(TrueLevelListLayer, LevelListLayer) {
     $override bool init(GJLevelList* list) {
@@ -21,6 +23,30 @@ class $modify(TrueLevelListLayer, LevelListLayer) {
     }
 
     void showTrueListDifficulty(CCObject* sender) {
-        log::info("showTrueListDifficulty");
+        CCObject* object;
+        CCARRAY_FOREACH(m_levels, object) {
+            if (GJGameLevel* level = geode::cast::typeinfo_cast<GJGameLevel*>(object)) {
+                logLevelInfo(level);
+            }
+        }
     }
 };
+
+#define LOG(member) log::info("- {}: {}", #member, level->m_##member)
+
+void logLevelInfo(GJGameLevel* level) {
+    log::info("Logging info for level {}", level->m_levelName);
+    log::info("- difficulty: {}", static_cast<int>(level->m_difficulty));
+    LOG(ratings);
+    LOG(ratingsSum);
+    LOG(demon);
+    LOG(demonDifficulty);
+    LOG(stars);
+    LOG(autoLevel);
+    LOG(starRatings);
+    LOG(starRatingsSum);
+    LOG(maxStarRatings);
+    LOG(minStarRatings);
+    LOG(demonVotes);
+    LOG(rateStars);
+}
