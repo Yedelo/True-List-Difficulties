@@ -56,6 +56,6 @@ class $modify(TrueLevelListLayer, LevelListLayer) {
         log::info("Mean difficulty: {}", statistics.mean);
         log::info("Median difficulty: {}", statistics.median);
         log::info("Mode difficulty: {}", statistics.mode);
-        TrueListDifficultyPopup::create("Hello true list difficulty popup")->show();
+        TrueListDifficultyPopup::create(static_cast<LevelListLayer*>(this))->show();
     }
 };
