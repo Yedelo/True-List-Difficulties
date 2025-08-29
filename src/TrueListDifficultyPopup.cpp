@@ -6,7 +6,7 @@ using namespace geode::prelude;
 
 TrueListDifficultyPopup* TrueListDifficultyPopup::create(LevelListLayer* layer) {
     TrueListDifficultyPopup* result = new TrueListDifficultyPopup();
-    if (result->initAnchored(240, 480, layer)) {
+    if (result->initAnchored(240, 300, layer)) {
         result->autorelease();
         return result;
     }
